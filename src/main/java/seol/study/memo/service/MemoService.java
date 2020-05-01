@@ -1,5 +1,6 @@
 package seol.study.memo.service;
 
+import org.elasticsearch.action.delete.DeleteResponse;
 import seol.study.memo.vo.MemoVO;
 
 import java.io.IOException;
@@ -10,7 +11,9 @@ public interface MemoService {
 
     MemoVO findById(String id) throws IOException;
 
-    MemoVO saveMemo(MemoVO memoVO) throws IOException;
+    String saveMemo(MemoVO memoVO) throws IOException;
 
     List<MemoVO> findByContentLike(MemoVO memoVO) throws IOException;
+
+    DeleteResponse delete(String _id) throws IOException;
 }

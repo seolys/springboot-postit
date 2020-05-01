@@ -26,10 +26,10 @@ public class MemoApiController {
     @PostMapping("/api/v1/memo")
     public ResultVO<MemoVO> memoPost(@RequestBody MemoVO memoVO) throws IOException {
         log.debug("memoVO : " + memoVO);
-        MemoVO saveMemoDto = memoService.saveMemo(memoVO);
+        String saveId = memoService.saveMemo(memoVO);
 
         ResultVO<MemoVO> resultVO = new ResultVO<>();
-        resultVO.setData(saveMemoDto);
+        resultVO.setData(memoService.findById(saveId));
         return resultVO;
     }
 

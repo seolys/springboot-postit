@@ -2,6 +2,8 @@ package seol.study.memo.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.elasticsearch.action.delete.DeleteRequest;
+import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexRequest;
@@ -12,7 +14,6 @@ import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.query.QueryStringQueryBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.SortOrder;
@@ -77,7 +78,7 @@ public class MemoServiceImpl implements MemoService {
     }
 
     @Override
-    public MemoVO saveMemo(MemoVO memoVO) throws IOException {
+    public String saveMemo(MemoVO memoVO) throws IOException {
         this.saveValidCheck(memoVO);
 
         IndexRequest request = new IndexRequest("memo","_doc");
@@ -98,12 +99,12 @@ public class MemoServiceImpl implements MemoService {
         IndexResponse response = client.index(request, RequestOptions.DEFAULT);
         client.close();
 
-        return this.findById(response.getId());
+        return response.getId();
     }
 
     private void saveValidCheck(MemoVO memoVO) {
         if (memoVO == null || memoVO.getContent() == null || "".equals(memoVO.getContent()))
-            throw new NullPointerException("내용을 입력해주세요.");
+            throw new IllegalArgumentException("document content");
     }
 
     @Override
@@ -133,6 +134,23 @@ public class MemoServiceImpl implements MemoService {
                 .map(MemoVO::new)
                 .collect(Collectors.toList());
         return collect;
+    }
+
+    @Override
+    public DeleteResponse delete(String _id) throws IOException {
+        this.deleteValidCheck(_id);
+        DeleteRequest request = new DeleteRequest(INDEX_NAME, TYPE_NAME, _id);
+
+        RestHighLevelClient client = esRestClient.newInstance();
+        DeleteResponse deleteResponse = client.delete(request, RequestOptions.DEFAULT);
+        client.close();
+        return deleteResponse;
+    }
+
+    private void deleteValidCheck(String id) {
+        if (id == null || "".equals(id)) {
+            throw new IllegalArgumentException("document id");
+        }
     }
 
 }

@@ -2,6 +2,7 @@ package seol.study.memo.vo;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.elasticsearch.search.SearchHit;
 
 import java.util.Arrays;
@@ -11,6 +12,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Data
+@NoArgsConstructor
 public class MemoVO {
     private String id;
     private String content;
