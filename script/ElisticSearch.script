@@ -1,0 +1,91 @@
+# 인덱스 생성
+PUT /memo
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 5,
+      "number_of_replicas": 1
+    },
+    "analysis": {
+      "analyzer": {
+        "korean_analyzer":{
+          "tokenizer": "nori_user_dict_tokenizer",
+          "filter": [
+            "pos_filter_speech",
+            "lowercase",
+            "english_stop"
+          ]
+        }
+      },
+      "tokenizer": {
+        "nori_user_dict_tokenizer": {
+          "type": "nori_tokenizer",
+          "decompound_mode": "mixed",
+          "user_dictionary": "userdict_ko.txt"
+        }
+      },
+      "filter": {
+        "english_stop": {
+          "type": "stop",
+          "stopwords": "_english_"
+        },
+        "pos_filter_speech": {
+          "type": "nori_part_of_speech",
+          "stoptags": [
+            "E",
+            "IC",
+            "J",
+            "MAG",
+            "MAJ",
+            "MM",
+            "NA",
+            "NR",
+            "SC",
+            "SE",
+            "SF",
+            "SP",
+            "SSC",
+            "SSO",
+            "SY",
+            "UNA",
+            "UNKNOWN",
+            "VA",
+            "VCN",
+            "VCP",
+            "VSV",
+            "VV",
+            "VX",
+            "XPN",
+            "XR",
+            "XSA",
+            "XSN",
+            "XSV"
+          ]
+        }
+      }
+    }
+  }
+}
+
+
+# 매핑 생성
+PUT /memo/_mapping/_doc
+{
+  "properties": {
+    "content": {
+      "type": "text",
+      "analyzer": "korean_analyzer"
+    },
+    "tags": {
+        "type": "completion"
+    },
+    "regDateTime": {
+        "type": "date",
+        "format": "yyyy-MM-dd HH:mm:ss"
+    },
+    "uptDateTime": {
+        "type": "date",
+        "format": "yyyy-MM-dd HH:mm:ss"
+    }
+  }
+}

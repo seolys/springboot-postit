@@ -1,0 +1,121 @@
+body {
+    background-color: #efefef;
+    margin: 0px;
+}
+a {
+    text-decoration:none;
+    z-index: 1;
+}
+textarea {
+    resize: none;
+}
+
+.logo {
+    z-index:1
+}
+.header {
+    background: #cecece;
+    padding: 8px;
+    font-size: 22px;
+    position: relative;
+    height: 25px;
+}
+.header_left {
+    position: absolute;
+}
+.header_right {
+    position: absolute;
+    right: 10px;
+    top: 6px;
+    z-index: 50;
+}
+.header_center {
+    position: relative;
+    text-align: center;
+    top: -4px;
+}
+.contents {
+    margin: 0px 0px 8px 8px;
+}
+.memo_area {
+    background-color: #fffbbf;
+    float: left;
+    width: 258px;
+    margin: 8px 8px 0px 0px;
+    box-shadow: 0 1px 3px #b6b6b6;
+    position: relative;
+}
+.memo_area:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+.memo_header {
+    position: relative;
+    line-height: 34px;
+    display: block;
+    height: 28px;
+}
+.memo_header_left {
+    position: absolute;
+    top: -2px;
+    left: 4px;
+}
+.memo_header_center {
+    position: relative;
+    margin-left: 25px;
+}
+.memo_header_right {
+    position: absolute;
+    top: -2px;
+    right: 6px;
+    font-size: 0;
+    line-height: 1.5;
+    padding: 8px 3px 10px;
+}
+
+.memo_body {
+    height: 200px;
+    padding: 5px 5px 5px 5px;
+    border-top: 1px solid #dadada;
+}
+
+.memo_footer {
+    height: 20px;
+    padding: 5px 5px 5px 5px;
+}
+
+
+
+input#searchKeyword {
+    font-size: 18px;
+}
+
+textarea.memo-content {
+    width: 97%;
+    height: 99%;
+    border: none;
+    background-color: lightyellow;
+    font-size: 15px;
+    line-height: 23px;
+}
+
+input.memo-tag {
+    border: none;
+    background-color: lightyellow;
+}
+
+a.memo-tag {
+    font-size: 13px;
+}
+
+input.memo-tag {
+    width: 96%;
+}
+div.reg_form_title {
+    margin-left: 7px;
+}

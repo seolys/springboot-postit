@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>메모</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="/index.js"></script>
+</head>
+<body onload="memoRender();">
+    <div class="header">
+        <div class="header_left">
+            <a href="/" class="logo">Post-it</a>
+        </div>
+        <div class="header_right">
+            <a href="#" class="button">📝</a><!--구현필요-->
+            <a href="#" class="button">⛔</a><!--구현필요-->
+        </div>
+        <div class="header_center">
+            <input type="text" id="searchKeyword" onkeyup="if (event.keyCode == 13) memoSearch();" >
+            <a href="#" class="button" onclick="memoSearch();">🔍</a>
+        </div>
+    </div>
+    <div class="contents">
+        <div class="memo_area reg_form">
+            <div class="memo_header">
+                <div class="reg_form_title">메모를 입력해 주세요.</div>
+                <div class="memo_header_right">
+                    <button type="button" onclick="memoRegist();">추가</button>
+                </div>
+            </div>
+            <div class="memo_body">
+                <textarea id="memoContent" class="memo-content"></textarea>
+            </div>
+            <div class="memo_footer">
+                <input type="text" id="memoTag" class="memo-tag" placeholder="콤마(,)로 구분하여 태그를 넣을 수 있습니다.">
+            </div>
+        </div>
+        <!--
+        <div class="memo_area">
+            <div class="memo_header">
+                <input type="checkbox">
+                2020.05.01
+                <div class="memo_header_right">
+                    <button>작성</button>
+                </div>
+            </div>
+            <div class="memo_body">
+                <textarea class="memo-content"></textarea>
+            </div>
+            <div class="memo_footer">
+                <input type="text" class="memo-tag">
+            </div>
+        </div>
+        -->
+    </div>
+</body>
+</html>
